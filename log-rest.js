@@ -1,14 +1,17 @@
-// https://www.moesif.com/blog/technical/logging/How-we-built-a-Nodejs-Middleware-to-Log-HTTP-API-Requests-and-Responses/
+// Most of this code is courtesy of: https://www.moesif.com/blog/technical/logging/How-we-built-a-Nodejs-Middleware-to-Log-HTTP-API-Requests-and-Responses/
 
 // To run, open a command line in the same folder as this file, then run: node log-rest.js
-const http = require("http");
 const port = 8888;
+
+const http = require("http");
 
 const server = http.createServer((request, response) => {
     const requestStart = Date.now();
 
     let body = [];
     let requestErrorMessage = null;
+
+    response.write("{}");
 
     // Set CORS headers
     response.setHeader('Access-Control-Allow-Origin', '*');
