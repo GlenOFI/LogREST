@@ -10,6 +10,15 @@ const server = http.createServer((request, response) => {
     let body = [];
     let requestErrorMessage = null;
 
+    // Set CORS headers
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Request-Method', '*');
+    if (request.method === 'OPTIONS') {
+        response.writeHead(200);
+        response.end();
+        return;
+    }
+
     const getChunk = chunk => body.push(chunk);
     const assembleBody = () => {
         body = Buffer.concat(body).toString();
