@@ -22,7 +22,7 @@ const server = http.createServer((request, response) => {
     }
 
     // Return data
-    response.write("{}");
+    response.write(JSON.stringify({ "url": request.url }));
 
 
     const getChunk = chunk => body.push(chunk);
