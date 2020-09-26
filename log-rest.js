@@ -11,7 +11,6 @@ const server = http.createServer((request, response) => {
     let body = [];
     let requestErrorMessage = null;
 
-    response.write("{}");
 
     // Set CORS headers
     response.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,6 +20,10 @@ const server = http.createServer((request, response) => {
         response.end();
         return;
     }
+
+    // Return data
+    response.write("{}");
+
 
     const getChunk = chunk => body.push(chunk);
     const assembleBody = () => {
@@ -70,10 +73,9 @@ const log = (request, response, errorMessage, requestStart) => {
 
     console.log(
         JSON.stringify({
-            timestamp: Date.now(),
-            processingTime: Date.now() - requestStart,
+            requestStart: new Date(requestStart),
+            processingTimeMs: Date.now() - requestStart,
             rawHeaders,
-            // body,
             errorMessage,
             httpVersion,
             method,
